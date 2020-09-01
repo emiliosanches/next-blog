@@ -1,5 +1,8 @@
-export const HomePage = () => (
-    <head>
-        <h1>Hello World!</h1>
-    </head>
-);
+import React from 'react';
+import LandingPage from '../_pages/LandingPage';
+
+export default function HomePage() {   
+    return (
+        <LandingPage />
+    );
+}
