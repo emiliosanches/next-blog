@@ -16,7 +16,7 @@ const Card: React.FC<CardProps> = props => {
             <img src={props.imageURL} />
             <h3>{props.title}</h3>
             <p>{props.desc}</p>
-            <Link href="/">Leia mais...</Link>
+            <Link href="/blog/1">Leia mais...</Link>
         </CardDiv>
     );
 }

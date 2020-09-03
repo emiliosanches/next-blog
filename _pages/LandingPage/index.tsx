@@ -3,7 +3,7 @@ import Topbar from '../../components/Topbar';
 import Presentation from './components/Presentation';
 import CardsList from './components/CardsList';
 
-export default function HomePage() {
+export default () => {
     return (
         <>
             <Topbar />
