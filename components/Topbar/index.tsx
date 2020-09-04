@@ -8,7 +8,7 @@ const Topbar: React.FC = () => {
         <header>
             <StyledTopbar>
                 <Section name="Home" route="/" />
-                <Section name="Escreva" route="/"/>
+                <Section name="Escreva" route="/write"/>
                 <SearchSection />
                 <Section name="Sobre" route="/"/>
             </StyledTopbar>
