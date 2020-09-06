@@ -1,31 +1,45 @@
 import React, { useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import { Container, Editor, Preview } from './styles';
+import { Container } from './styles';
 import Topbar from '../../components/Topbar';
+import { BodyContext, OtherInfoContext } from './context';
+import WriteBody from './components/WriteBody';
+import WriteOtherInfo from './components/WriteOtherInfo'
 
 const WritePage: React.FC = () => {
+
+    const [stepIndex, setStepIndex] = useState(0)
+
     const [body, setBody] = useState("");
-    const [isEditorVisible, setIsEditorVisible] = useState(false);
-    const [isPreviewVisible, setIsPreviewVisible] = useState(false);
-
-    function handleOpenEditor() {
-        setIsEditorVisible(true);
+    const bodyContextValue = {
+        bodyValue: body,
+        setBody: (newBody: string) => setBody(newBody)
     }
 
-    function handleCloseEditor() {
-        setIsEditorVisible(false);
+    const [title, setTitle] = useState("");
+    const [image_url, setImage_url] = useState("");
+    const [author, setAuthor] = useState<string>();
+
+    const otherInfoContextValue = {
+        title: {
+            value: title,
+            changeValue: (value: string) => setTitle(value)
+        },
+        image: {
+            value: image_url,
+            changeValue: (value: string) => setImage_url(value)
+        },
+        author: {
+            value: author,
+            changeValue: (value: string) => setAuthor(value)
+        }
     }
 
-    function handleOpenPreview() {
-        setIsPreviewVisible(true);
+    function handleNextStep() {
+        setStepIndex(stepIndex + 1);
     }
 
-    function handleClosePreview() {
-        setIsPreviewVisible(false);
-    }
-    
-    function handleChangeBody(evt: React.ChangeEvent<HTMLTextAreaElement>) {
-        setBody(evt.target.value);
+    function handlePreviousStep() {
+        setStepIndex(stepIndex - 1);
     }
 
     return (
@@ -33,45 +47,19 @@ const WritePage: React.FC = () => {
             <Topbar />
             <Container>
                 <h1>Escreva seu post aqui:</h1>
-                <div id="markdown-container">
-                    <textarea
-                        value={body}
-                        onChange={handleChangeBody} />
-                    
-                    <div id="change-mode">
-                        <button onClick={handleOpenEditor}>Abrir apenas editor</button>
-                        <button onClick={handleOpenPreview}>Abrir apenas preview</button>
-                        <button id="send">Enviar</button>
-                    </div>
-                    
-                    <div id="mini-preview">
-                        <ReactMarkdown source={body} />
-                    </div>
-                </div>
-                {
-                    isEditorVisible && (
-                        <Editor>
-                            <div id="toolbar">
-                                {/* Add tools like: bold, italic, image, etc. */}
-                                <span id="close-btn" onClick={handleCloseEditor}>X</span>
-                            </div>
-                            <textarea value={body} onChange={handleChangeBody} />
-                        </Editor>
-                    )
-                }
 
                 {
-                    isPreviewVisible && (
-                        <Preview>
-                            <div id="toolbar">
-                                {/* Add tools like: bold, italic, image, etc. */}
-                                <span id="close-btn" onClick={handleClosePreview}>X</span>
-                            </div>
-                            <div id="preview">
-                                <ReactMarkdown source={body} />
-                            </div>
-                        </Preview>
-                    )
+                    [(
+                        <BodyContext.Provider value={bodyContextValue} >
+                            <WriteBody onClickNext={handleNextStep}/>
+                        </BodyContext.Provider>
+                    ), (
+                        <BodyContext.Provider value={bodyContextValue} >
+                            <OtherInfoContext.Provider value={otherInfoContextValue}>
+                                <WriteOtherInfo clickBack={handlePreviousStep}/>
+                            </OtherInfoContext.Provider>
+                        </BodyContext.Provider>
+                    )][stepIndex]
                 }
             </Container>
         </>

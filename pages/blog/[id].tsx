@@ -21,7 +21,7 @@ const ViewPost: React.FC<BlogPostProps> = props => {
     );
 }
 
-export default ViewPost
+export default ViewPost;
 
 export const getServerSideProps: GetServerSideProps<BlogPostProps> = async context => {
     const id = String(context.params?.id);
