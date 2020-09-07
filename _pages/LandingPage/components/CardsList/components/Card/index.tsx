@@ -1,21 +1,24 @@
 import React from 'react';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 
 import CardDiv from './styles';
 
-interface CardProps {
+export interface ICard {
     id: string;
     title: string;
-    imageURL: string;
-    desc: string;
+    image_url: string;
+    body: string;
 }
 
-const Card: React.FC<CardProps> = props => {
+const Card: React.FC<{card: ICard}> = ({ card }) => {
     return (
         <CardDiv>
-            <img src={props.imageURL} />
-            <h3>{props.title}</h3>
-            <p>{props.desc}</p>
+            <img src={card.image_url} />
+            <h3>{card.title}</h3>
+            <p>
+                <ReactMarkdown source={card.body} />
+            </p>
             <Link href="/blog/1">Leia mais...</Link>
         </CardDiv>
     );

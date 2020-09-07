@@ -1,34 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ListSection } from './styles';
-import Card from './components/Card';
+import Card, { ICard } from './components/Card';
 
+const CardsList: React.FC<{ firstCards: ICard[] }> = ({ firstCards }) => {
+    
+    //using state so, in a future update, cards can be loaded gradually
+    const [cards, ] = useState(firstCards);
 
-const CardsList: React.FC = () => {
     return (
         <ListSection>
-            <Card
-                id="a"
-                title="Post example title"
-                desc="Os primeiros caracteres do blog aparecem aqui.
-                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla hendre..."
-                imageURL="https://www.w3schools.com/w3css/img_lights.jpg"
-            />
-
-            <Card
-                id="a"
-                title="Post example title"
-                desc="Os primeiros caracteres do blog aparecem aqui.
-                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla hendre..."
-                imageURL="https://www.w3schools.com/w3css/img_lights.jpg"
-            />
-
-            <Card
-                id="a"
-                title="Post example title"
-                desc="Os primeiros caracteres do blog aparecem aqui.
-                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla hendre..."
-                imageURL="https://www.w3schools.com/w3css/img_lights.jpg"
-            />
+            {
+                cards.map(cardInfo => <Card card={cardInfo}></Card>)
+            }
         </ListSection>
     );
 }

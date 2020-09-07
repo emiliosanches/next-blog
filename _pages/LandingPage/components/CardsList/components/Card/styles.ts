@@ -24,9 +24,13 @@ export default styled.div`
 
     & p {
         color: black;
-        font-size: 2rem;
+        font-size: 90% !important;
         font-family: Roboto;
         font-weight: 300;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-height: 100px;
+        margin-top: 0;
     }
 
     & a {
