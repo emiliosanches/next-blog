@@ -16,7 +16,7 @@ const Presentation: React.FC = () => {
                         <span>Ler</span>
                         <i className="fas fa-chevron-down" />
                     </button>
-                    <button onClick={() => { router.push('/write') }}>
+                    <button onClick={() => {}}>
                         <span>Escrever</span>
                         <i className="fas fa-chevron-right" />
                     </button>
