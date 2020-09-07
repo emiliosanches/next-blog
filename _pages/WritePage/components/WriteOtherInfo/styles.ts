@@ -89,7 +89,7 @@ export const MessageDiv = styled.div`
         background: rgba(85, 85, 85, 0.8);
     }
 
-    & div {
+    & > div {
         background: black;
         padding: 20px;
         color: white;
@@ -98,24 +98,31 @@ export const MessageDiv = styled.div`
         align-items: center;
     }
 
-    & div h1 {
+    & > div h1 {
         margin: 0 auto;
     }
 
-    & div svg {
+    & > div svg {
         margin: 20px;
     }
 
-    & div a {
+    & > div > div {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    & > div > div > a {
         color: white;
         text-decoration: none;
     }
 
-    & div a:hover {
+    & > div > div > a:hover {
         text-decoration-line: underline;
     }
 
-    & div button {
+    & > div button {
         background-color: red;
         color: white;
         border-radius: 8px;

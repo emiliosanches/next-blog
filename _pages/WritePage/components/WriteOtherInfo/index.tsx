@@ -15,7 +15,7 @@ const WriteOtherInfo: React.FC<WriteOtherInfoComponentProps> = ({ clickBack }) =
 
     const { bodyValue } = useContext(BodyContext);
 
-    const [success, setSuccess] = useState(false);
+    const [result, setResult] = useState<{ success: boolean; id?: string}>({ success: false });
     const [error, setError] = useState(false);
 
     function handleChangeTitle(evt: React.ChangeEvent<HTMLInputElement>) {
@@ -35,11 +35,14 @@ const WriteOtherInfo: React.FC<WriteOtherInfoComponentProps> = ({ clickBack }) =
             title: title.value,
             imageURL: image.value,
             body: bodyValue,
-            author: author
+            author: author.value
         }
 
         api.post('/blog-post', body).then(response => {
-            if (response.status === 201) setSuccess(true);
+            if (response.status === 201) setResult({
+                success: true,
+                id: response.data.id
+            });
             else setError(true);
         }).catch(() => {
             setError(true);
@@ -93,12 +96,15 @@ const WriteOtherInfo: React.FC<WriteOtherInfoComponentProps> = ({ clickBack }) =
             </Container>
 
             {
-                success && (
+                result.success && (
                     <MessageDiv>
                         <div>
                             <h1>Seu post foi adicionado com sucesso!</h1>
                             <FaRegCheckCircle color="green" size={64} />
-                            <Link href="/">Voltar à página inicial</Link>
+                            <div>
+                                <Link href="/">Voltar à página inicial</Link>
+                                <Link href={'/blog/' + result.id}>Ver post</Link>
+                            </div>
                         </div>
                     </MessageDiv>
                 )
@@ -108,7 +114,7 @@ const WriteOtherInfo: React.FC<WriteOtherInfoComponentProps> = ({ clickBack }) =
                 error && (
                     <MessageDiv>
                         <div>
-                            <h1>Ocorreu um erro ao adicioar seu post!</h1>
+                            <h1>Ocorreu um erro ao adicionar seu post!</h1>
                             <FaRegTimesCircle color="red" size={64} />
                             <button onClick={() => setError(false)}>Fechar</button> 
                         </div>
