@@ -33,7 +33,7 @@ const WriteOtherInfo: React.FC<WriteOtherInfoComponentProps> = ({ clickBack }) =
     function handleSend() {
         const body = {
             title: title.value,
-            imageURL: image.value,
+            image_url: image.value,
             body: bodyValue,
             author: author.value
         }
