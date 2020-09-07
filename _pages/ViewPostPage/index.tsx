@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import Topbar from '../../components/Topbar';
 import PostContent from './components/PostData';
 
@@ -19,7 +20,7 @@ const ViewPostPage: React.FC<ViewPostProps> = ({ postData }) => {
                 <h1>{postData.title}</h1>
                 <img src={postData.image_url} />
                 <div id="body">
-                    {postData.body}
+                    <ReactMarkdown source={postData.body}/>
                 </div>
             </PostContent>
         </>
