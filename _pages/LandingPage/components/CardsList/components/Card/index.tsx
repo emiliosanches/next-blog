@@ -19,7 +19,7 @@ const Card: React.FC<{card: ICard}> = ({ card }) => {
             <p>
                 <ReactMarkdown source={card.body} />
             </p>
-            <Link href="/blog/1">Leia mais...</Link>
+            <Link href={`/blog/${card.id}`}>Leia mais...</Link>
         </CardDiv>
     );
 }
