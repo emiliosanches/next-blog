@@ -8,9 +8,9 @@ const Presentation: React.FC = () => {
     return (
         <StyledPresentation>
             <h1>Black Journal</h1>
-            <h2>Post anonymously.<br />Read about anything.</h2>
+            <h2>Escreva anonimamente.<br />Leia sobre qualquer coisa.</h2>
             <div>
-                <span>No accounts needed.<br />Just start writing.</span>
+                <span>Não precisa de contas.<br />Apenas comece a escrever.</span>
                 <div id="buttons-container">
                     <button onClick={() => { router.push('/write')}}>
                         <span>Ler</span>
